@@ -1,10 +1,9 @@
-> [!NOTE]
-> This is work in progress and contributions are welcome. I will remove this notice, once I deem the plugin to be ready.
-
 # vim-testrunner
 
-A vim/neovim plugin that allows the user to run unit-tests from inside the editor. It supports multiple testing frameworks like `PyTest`, `RSpec` and `Jasmine`. 
+> [!WARNING]
+> This is work in progress and contributions are welcome. I will remove this notice, once I deem the plugin to be ready.
 
+A vim/neovim plugin that allows the user to run unit-tests from inside the editor. It supports multiple testing frameworks like `PyTest`, `RSpec` and `Jasmine`. 
 
 ## Installation
 
