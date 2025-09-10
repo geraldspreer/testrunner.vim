@@ -1,0 +1,16 @@
+*testrunner*   testrunner.vim Documentation
+
+TESRUNNER PLUGIN
+================
+
+testrunner.vim provides commands to run test cases from within Vim.
+
+COMMANDS
+--------
+
+:RunTests
+    Runs all the test cases in the current buffer.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
+
