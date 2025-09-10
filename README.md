@@ -1,7 +1,5 @@
-[![NOTE](https://img.shields.io/badge/NOTE-Work%20In%20Progress-yellow)](https://shields.io/)
-
-![NOTE]
-> This is work in progress
+> [!NOTE]
+> This is work in progress and contributions are welcome. I will remove this notice, once I deem the plugin to be ready.
 
 # vim-testrunner
 
