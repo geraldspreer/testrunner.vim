@@ -3,7 +3,7 @@
 > [!WARNING]
 > This is work in progress and contributions are welcome. I will remove this notice, once I deem the plugin to be ready.
 
-A vim/neovim plugin that allows the user to run unit-tests from inside the editor. It supports multiple testing frameworks like `PyTest`, `RSpec` and `Jasmine`. 
+A Vim/Neovim plugin that allows the user to run unit-tests from inside the editor. It supports multiple testing frameworks like `PyTest`, `RSpec` and `Minitest`. 
 
 ## Installation
 
@@ -15,7 +15,7 @@ With `vim-plug`, add the following line to your `.vimrc` or `init.vim`:
 ```vim
 Plug 'geraldspreer/vim-testrunner'
 ```
-Then, run `:PlugInstall` in vim/neovim.
+Then, run `:PlugInstall` in Vim/Neovim.
 
 ### `Lazy.nvim`
 
@@ -23,7 +23,7 @@ With `Lazy.nvim`, add the following line to your plugin list:
 ```lua
 { 'geraldspreer/vim-testrunner' }
 ```
-Then, run `:Lazy sync` in neovim.
+Then, run `:Lazy sync` in Neovim.
 
 ## Configuration
 ...

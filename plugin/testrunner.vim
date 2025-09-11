@@ -9,11 +9,10 @@ function! RunTests() abort
   let l:ext  = expand('%:e')
 
   let l:tests = [
-        \ ['_spec\.rb$',        'bundle exec rspec %'],
-        \ ['_test\.rb$',        'bin/rails test %'],
-        \ ['pec\.js$',          'npm test %'],
-        \ ['test_.*\.py$',     'pytest -s -v -x ' . (exists("g:testParams") ? g:testParams : "") . " %"],
-        \ ['\.py$',             'pytest -s -vvv -x tests/%:h/test_%:t'],
+        \ ['_spec\.rb$',   'bundle exec rspec %'],
+        \ ['_test\.rb$',   'bin/rails test %'],
+        \ ['test_.*\.py$', 'pytest -s -vv -x ' . (exists("g:testParams") ? g:testParams : "") . " %"],
+        \ ['\.py$',        'pytest -s -vvv -x tests/%:h/test_%:t'],
         \ ]
 
   for [l:pat, l:cmd] in l:tests

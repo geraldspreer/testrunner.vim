@@ -11,6 +11,9 @@ COMMANDS
 :RunTests
     Runs all the test cases in the current buffer.
 
+:RunFocusedTest
+    Run the test case under the cursor
+
 ==============================================================================
 vim:tw=78:ts=8:ft=help:norl:
 
