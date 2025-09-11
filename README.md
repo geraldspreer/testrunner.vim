@@ -26,11 +26,13 @@ With `Lazy.nvim`, add the following line to your plugin list:
 Then, run `:Lazy sync` in Neovim.
 
 ## Configuration
-...
+
+- [ ] Add config option for `vsp` split size
+- [ ] Add option to configure commands for the test runners like `pytest -s -vvv`
 
 ## Contributing
 
-If you would like to contribute to this project, please fork the repository and make changes as you'd like. Pull requests are very welcome.
+If you would like to contribute to this project, please fork the repository and make changes as you'd like. Pull requests are welcome.
 
 
 
