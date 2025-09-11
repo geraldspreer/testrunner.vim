@@ -8,14 +8,14 @@ function! RunTests() abort
   let l:file = expand('%')
   let l:ext  = expand('%:e')
 
-  let l:tests = [
+  let l:commands = [
         \ ['_spec\.rb$',   'bundle exec rspec %'],
         \ ['_test\.rb$',   'bin/rails test %'],
         \ ['test_.*\.py$', 'pytest -s -vv -x ' . (exists("g:testParams") ? g:testParams : "") . " %"],
         \ ['\.py$',        'pytest -s -vvv -x tests/%:h/test_%:t'],
         \ ]
 
-  for [l:pat, l:cmd] in l:tests
+  for [l:pat, l:cmd] in l:commands
     if l:file =~ l:pat
       return s:RunInTerminal(l:cmd)
     endif
@@ -64,7 +64,7 @@ function! RunFocusedTest() abort
     return s:RunInTerminal('pytest -s ' . l:target)
   endif
 
-  echom "Focused tests not supported for this filetype"
+  echom "Focused tests are not supported for this filetype"
 endfunction
 
 command! RunTests call RunTests()
