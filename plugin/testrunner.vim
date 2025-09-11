@@ -27,7 +27,8 @@ function! RunTests() abort
 endfunction
 
 function! s:RunInTerminal(cmd) abort
-  vsp
+  " TODO: Make this a config option
+  200 vsp
   execute 'ter! clear && ' . expandcmd(a:cmd)
   startinsert
 endfunction
