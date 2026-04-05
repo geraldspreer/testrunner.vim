@@ -1,6 +1,6 @@
 *testrunner*   testrunner.vim Documentation
 
-TESRUNNER PLUGIN
+TESTRUNNER PLUGIN
 ================
 
 testrunner.vim provides commands to run test cases from within Vim.

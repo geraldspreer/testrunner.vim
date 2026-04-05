@@ -2,6 +2,10 @@ if exists('g:loaded_testrunner')
   finish
 endif
 
+if !exists('g:test_window_width')
+  let g:test_window_width = 200
+endif
+
 let g:loaded_testrunner = 1
 
 function! RunTests() abort
@@ -28,8 +32,7 @@ function! RunTests() abort
 endfunction
 
 function! s:RunInTerminal(cmd) abort
-  " TODO: Make this a config option
-  200 vsp
+  execute g:test_window_width . ' vsp'
   execute 'ter! clear && ' . expandcmd(a:cmd)
   startinsert
 endfunction
