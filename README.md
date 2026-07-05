@@ -24,19 +24,35 @@ Then, run `:Lazy sync` in Neovim.
 
 ## Configuration
 
-### Set the size of the test window
+- Set the size of the test window `:let g:testWindowWidth = {width}`  
+- Add additional command line parameters `:let g:testParams = {params}`  
 
-`:let g:testWindowWidth = {width}`
+See the **Lazy.nvim** example below for how to include these settings in your configuration.
 
-### Add additional command line parameters
+### Key mappings
 
-`:let g:testParams = {params}` this is currently only used for `pytest`.
+The plugin provides two commands: `:RunTests` to run all tests and `:RunFocusedTest` to run the test under the cursor. You can map these to your preferred keys. For example, to map `<leader>t` for running all tests and `<leader>T` for running focused tests:
 
-You can also set these configurations in your configuration:  
+**Vim/init.vim:**
+```vim
+nnoremap <leader>t :RunTests<CR>
+nnoremap <leader>T :RunFocusedTest<CR>
+```
 
+**Neovim/init.lua:**
+```lua
+vim.keymap.set('n', '<leader>t', ':RunTests<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>T', ':RunFocusedTest<CR>', { noremap = true })
+```
+
+**With Lazy.nvim:**
 ```lua
   { 
   'geraldspreer/testrunner.vim', 
+  keys = {
+    { '<leader>t', ':RunTests<CR>', noremap = true, desc = 'Run all tests' },
+    { '<leader>T', ':RunFocusedTest<CR>', noremap = true, desc = 'Run focused test' },
+  },
   init = function()
       vim.g.testWindowWidth = 200
       vim.g.testParams = "-s -vvv -x"
