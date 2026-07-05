@@ -1,9 +1,6 @@
-# vim-testrunner
+# testrunner.vim
 
-> [!NOTE]
-> This is work in progress and contributions are welcome. I will remove this notice, once I deem the plugin to be ready.
-
-A Vim/Neovim plugin that allows the user to run unit-tests from inside the editor. It supports multiple testing frameworks like `PyTest`, `RSpec` and `Minitest`. 
+A Vim/Neovim plugin that allows you to run unit tests from inside the editor. It supports multiple testing frameworks like `PyTest`, `RSpec`, and `Minitest`. 
 
 ## Installation
 
@@ -13,7 +10,7 @@ You can install this plugin using your favorite plugin manager.
 
 With `vim-plug`, add the following line to your `.vimrc` or `init.vim`:
 ```vim
-Plug 'geraldspreer/vim-testrunner'
+Plug 'geraldspreer/testrunner.vim'
 ```
 Then, run `:PlugInstall` in Vim/Neovim.
 
@@ -21,14 +18,31 @@ Then, run `:PlugInstall` in Vim/Neovim.
 
 With `Lazy.nvim`, add the following line to your plugin list:
 ```lua
-{ 'geraldspreer/vim-testrunner' }
+{ 'geraldspreer/testrunner.vim' }
 ```
 Then, run `:Lazy sync` in Neovim.
 
 ## Configuration
 
-- [ ] Add config option for `vsp` split size
-- [ ] Add option to configure commands for the test runners like `pytest -s -vvv`
+### Set the size of the test window
+
+`:let g:testWindowWidth = {width}`
+
+### Add additional command line parameters
+
+`:let g:testParams = {params}` this is currently only used for `pytest`.
+
+You can also set these configurations in your configuration:  
+
+```lua
+  { 
+  'geraldspreer/testrunner.vim', 
+  init = function()
+      vim.g.testWindowWidth = 200
+      vim.g.testParams = "-s -vvv -x"
+    end,
+  },
+```
 
 ## Contributing
 

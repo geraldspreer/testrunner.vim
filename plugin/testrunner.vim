@@ -2,8 +2,8 @@ if exists('g:loaded_testrunner')
   finish
 endif
 
-if !exists('g:test_window_width')
-  let g:test_window_width = 200
+if !exists('g:testWindowWidth')
+  let g:testWindowWidth = 80
 endif
 
 let g:loaded_testrunner = 1
@@ -15,6 +15,7 @@ function! RunTests() abort
   let l:tests = [
         \ ['_spec\.rb$',   'bundle exec rspec %'],
         \ ['_test\.rb$',   'bin/rails test %'],
+        \ ['_spec\.js$',    'npm test %'],
         \ ['test_.*\.py$', 'pytest -s -vv -x ' . (exists("g:testParams") ? g:testParams : "") . " %"],
         \ ['\.py$',        'pytest -s -vvv -x tests/%:h/test_%:t'],
         \ ]
@@ -32,7 +33,7 @@ function! RunTests() abort
 endfunction
 
 function! s:RunInTerminal(cmd) abort
-  execute g:test_window_width . ' vsp'
+  execute g:testWindowWidth . ' vsp'
   execute 'ter! clear && ' . expandcmd(a:cmd)
   startinsert
 endfunction
@@ -47,8 +48,15 @@ function! RunFocusedTest() abort
     return s:RunInTerminal('bin/rspec ' . l:specpath)
   endif
 
+  " Ruby Minitest (focused on current line)
+  if l:file =~# '_test\.rb$'
+    let l:specpath = l:file . ':' . line('.')
+    echom "Running focused... " . l:specpath
+    return s:RunInTerminal('rails test ' . l:specpath)
+  endif
+
   " Python unittest (focused on current function)
-  if l:file =~# '^test_.*\.py$'
+  if l:file =~# 'test_.*\.py$'
     " Get class name from file name (test_foo_bar.py → TestFooBar)
     let l:file_name = expand('%:t:r')
     let l:parts = split(l:file_name, '_')
@@ -74,5 +82,3 @@ endfunction
 command! RunTests call RunTests()
 command! RunFocusedTest call RunFocusedTest()
 
-nnoremap <leader>t :RunTests<CR>
-nnoremap <leader>T :RunFocusedTest<CR>
