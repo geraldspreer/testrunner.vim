@@ -6,6 +6,10 @@ if !exists('g:testWindowWidth')
   let g:testWindowWidth = 80
 endif
 
+if !exists('g:testParams')
+  let g:testParams = ""
+endif
+
 let g:loaded_testrunner = 1
 
 function! RunTests() abort
@@ -13,11 +17,11 @@ function! RunTests() abort
   let l:ext  = expand('%:e')
 
   let l:tests = [
-        \ ['_spec\.rb$',   'bundle exec rspec %'],
-        \ ['_test\.rb$',   'bin/rails test %'],
-        \ ['_spec\.js$',    'npm test %'],
-        \ ['test_.*\.py$', 'pytest -s -vv -x ' . (exists("g:testParams") ? g:testParams : "") . " %"],
-        \ ['\.py$',        'pytest -s -vvv -x tests/%:h/test_%:t'],
+        \ ['_spec\.rb$',   'bundle exec rspec ' . g:testParams . ' %'],
+        \ ['_test\.rb$',   'bin/rails test ' . g:testParams . ' %'],
+        \ ['_spec\.js$',    'npm test ' . g:testParams . ' %'],
+        \ ['test_.*\.py$', 'pytest -s -vv -x ' . g:testParams . ' %'],
+        \ ['\.py$',        'pytest -s -vvv -x ' . g:testParams . ' tests/%:h/test_%:t'],
         \ ]
 
   for [l:pattern, l:cmd] in l:tests
@@ -25,11 +29,6 @@ function! RunTests() abort
       return s:RunInTerminal(l:cmd)
     endif
   endfor
-
-  " Test any other file with rspec. Not sure that this makes sense
-  let l:specfile = substitute(expand('%:r:h') . '_spec.' . l:ext, "app", "spec", "")
-  echom "Running ... " . l:specfile
-  return s:RunInTerminal('rspec ' . l:specfile)
 endfunction
 
 function! s:RunInTerminal(cmd) abort
@@ -45,14 +44,14 @@ function! RunFocusedTest() abort
   if l:file =~# '_spec\.rb$'
     let l:specpath = l:file . ':' . line('.')
     echom "Running ... " . l:specpath
-    return s:RunInTerminal('bin/rspec ' . l:specpath)
+    return s:RunInTerminal('bin/rspec ' . g:testParams . ' ' . l:specpath)
   endif
 
   " Ruby Minitest (focused on current line)
   if l:file =~# '_test\.rb$'
     let l:specpath = l:file . ':' . line('.')
     echom "Running focused... " . l:specpath
-    return s:RunInTerminal('rails test ' . l:specpath)
+    return s:RunInTerminal('rails test ' . g:testParams . ' ' . l:specpath)
   endif
 
   " Python unittest (focused on current function)
@@ -73,7 +72,7 @@ function! RunFocusedTest() abort
 
     let l:target = l:file . '::' . l:class_name . '::' . l:function_name
     echom "Running ... " . l:target
-    return s:RunInTerminal('pytest -s ' . l:target)
+    return s:RunInTerminal('pytest -s ' . g:testParams . ' ' . l:target)
   endif
 
   echom "Focused tests are not supported for this filetype!"
